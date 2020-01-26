@@ -21,6 +21,11 @@ const UserSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: 'Tag',
     }],
+    // Authors followed by the user
+    authors: [{
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+    }],
   }
 );
 

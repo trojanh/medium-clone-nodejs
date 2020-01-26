@@ -5,7 +5,7 @@ import Mutation from './resolvers/Mutation';
 import Post from './resolvers/Post';
 import User from './resolvers/User';
 import { MONGODB_URI, PORT } from './config';
-import authenticate from './authenticate';
+import authenticate from './lib/authenticate';
 import models from "./models";
 
 const server = new GraphQLServer({
@@ -35,6 +35,7 @@ function connect() {
   return mongoose.connect(MONGODB_URI, {
     keepAlive: 1,
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useCreateIndex: true
   });
 }

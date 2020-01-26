@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { JWT_SECRET_KEY } from './config';
+import { JWT_SECRET_KEY } from '../config';
 import { AuthenticationError } from "apollo-server-core";
 
 const authenticate = ({ request }, models) => {

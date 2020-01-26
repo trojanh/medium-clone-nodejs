@@ -7,10 +7,13 @@ type Query {
 
   "fetch current user"
   tags: [Tag!]!
+
+  "fetch information about logged in user"
+  me: User!
 }
 
 type Mutation {
-  "creates new user using `CreateUserInput`"
+  "Register new user using `username` and `password`"
   signup(username: String!, password: String!): UserAuth!
 
   "Authenticate user to generate login token"
@@ -75,6 +78,7 @@ type User {
   _id: ID!
   username: String!
   tags: [Tag]
+  authors: [User]
 }
 
 type UserAuth {

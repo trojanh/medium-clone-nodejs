@@ -10,9 +10,10 @@ const PostSchema = new Schema({
   tags: [{
     type: Schema.Types.ObjectId,
     ref: 'Tag',
+    index: true
   }],
-  title: { type: String },
-  body: { type: String },
+  title: { type: String, index: true },
+  body: { type: String, index: true },
   createdAt: { type: Date },
   type: {
     type: String,

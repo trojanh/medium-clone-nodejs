@@ -6,7 +6,7 @@ const TagSchema = new Schema({
   name: {
     type: String,
     required: 'Name is required',
-    unique: [true, 'username already exists']
+    unique: [true, 'Tag name already exists']
   }
 });
 
