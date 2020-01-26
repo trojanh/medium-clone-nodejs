@@ -1,0 +1,94 @@
+type Query {
+  "fetch list of all users"
+  users(cursor: Cursor): [User!]!
+
+  "fetch list of all posts"
+  posts(cursor: Cursor): [Post!]!
+
+  "fetch current user"
+  tags: [Tag!]!
+}
+
+type Mutation {
+  "creates new user using `CreateUserInput`"
+  signup(username: String!, password: String!): UserAuth!
+
+  "Authenticate user to generate login token"
+  login(username: String!, password: String!): UserAuth!
+
+  "creates new post using `CreatePostInput`"
+  createPost(data: CreatePostInput!): Post!
+
+  "deletes existing post"
+  deletePost(id: ID!): Post!
+
+  "updates existing post"
+  updatePost(id: ID!, data: UpdatePostInput!): Post!
+
+  "creates new tag using `CreatePostInput`"
+  createTag(data: CreateTagInput!): Tag!
+
+  "deletes existing tag"
+  deleteTag(id: ID!): Tag!
+
+  "follow a tag"
+  followTag(tagId: ID!) : User
+
+  "unfollow a tag"
+  unFollowTag(tagId: ID!) : User
+}
+
+input Cursor {
+  limit: String
+  last: ID
+}
+
+input CreateTagInput {
+  name: String!
+}
+
+input CreatePostInput {
+  title: String!
+  body: String!
+  author: ID
+  type: PostType
+  tags: [ID!]
+}
+
+input UpdatePostInput {
+  title: String
+  body: String
+}
+
+enum PostType {
+  guestUserA
+  guestUserB
+  user
+}
+
+type Tag {
+  _id: ID!
+  name: String!
+}
+
+type User {
+  _id: ID!
+  username: String!
+  tags: [Tag]
+}
+
+type UserAuth {
+  _id: ID!
+  username: String!
+  token: String!
+}
+
+type Post {
+  _id: ID!
+  title: String!
+  body: String!
+  author: User
+  createdAt: String!
+  type: String!
+  tags: [Tag]
+}
