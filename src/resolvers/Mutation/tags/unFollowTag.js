@@ -1,6 +1,6 @@
 import { AuthenticationError } from "apollo-server-core";
 
-export async function unFollowTag (parent, args, { models, loggedInUser }) {
+export async function unFollowTag(parent, args, { models, loggedInUser }) {
   const { Tag, User } = models;
   const { tagId } = args;
   const currentUser = await loggedInUser();
@@ -8,7 +8,7 @@ export async function unFollowTag (parent, args, { models, loggedInUser }) {
   if (!currentUser) {
     throw new AuthenticationError("You must be logged in to follow a tag");
   }
-  if(!currentUser.tags.includes(tagId)) {
+  if (!currentUser.tags.includes(tagId)) {
     throw new Error("You are not following this tag!");
   }
 

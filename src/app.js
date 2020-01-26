@@ -16,10 +16,10 @@ const server = new GraphQLServer({
     Post,
     User
   },
-  context: req => ({ ...req, models, loggedInUser: () => authenticate(req, models)}),
+  context: req => ({ ...req, models, loggedInUser: () => authenticate(req, models) }),
 })
 
-connect ();
+connect();
 
 function listen() {
   server.start({ PORT }, () => {

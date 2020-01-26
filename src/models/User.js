@@ -35,7 +35,7 @@ UserSchema.methods.hashPassword = function hashPassword(reqPassword) {
 };
 
 UserSchema.methods.getJWT = function getJWT() {
-  return jwt.sign({ username: this.username }, JWT_SECRET_KEY, {expiresIn: '1d'});
+  return jwt.sign({ username: this.username }, JWT_SECRET_KEY, { expiresIn: '1d' });
 };
 
 UserSchema.methods.verifyPassword = function verifyPassword(reqPassword) {

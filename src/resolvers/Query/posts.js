@@ -6,5 +6,9 @@ export async function posts(parent, args, { models, loggedInUser }) {
   if (!currentUser) {
     throw new AuthenticationError("You must be logged in to follow a tag");
   }
-  return models.Post.find({});
+  return models.Post.find({}, [], {
+    sort: {
+      createdAt: -1 //Sort by Date DESC
+    }
+  });
 }

@@ -1,9 +1,9 @@
 const Post = {
   author(parent, args, { models }, info) {
-    return models.User.findOne({ _id: parent.author});
+    return models.User.findOne({ _id: parent.author });
   },
   tags(parent, args, { models }, info) {
-    return models.Tag.find({ _id: parent.tags});
+    return models.Tag.find({ _id: parent.tags });
   }
 }
 

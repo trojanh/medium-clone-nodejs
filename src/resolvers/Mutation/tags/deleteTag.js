@@ -1,6 +1,6 @@
 import { AuthenticationError } from "apollo-server-core";
 
-export async function deleteTag (parent, args, { models, loggedInUser }) {
+export async function deleteTag(parent, args, { models, loggedInUser }) {
   const { id } = args;
   const currentUser = await loggedInUser();
 

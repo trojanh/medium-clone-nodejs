@@ -35,10 +35,16 @@ type Mutation {
   deleteTag(id: ID!): Tag!
 
   "follow a tag"
-  followTag(tagId: ID!) : User
+  followTag(tagId: ID!): User
 
   "unfollow a tag"
-  unFollowTag(tagId: ID!) : User
+  unFollowTag(tagId: ID!): User
+
+  "follow an author"
+  followAuthor(userId: ID!): User
+
+  "unfollow an author"
+  unFollowAuthor(userId: ID!): User
 }
 
 input Cursor {

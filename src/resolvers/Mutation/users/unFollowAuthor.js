@@ -1,6 +1,6 @@
 import { AuthenticationError } from "apollo-server-core";
 
-export async function unFollowTag (parent, args, { models, loggedInUser }) {
+export async function unFollowAuthor(parent, args, { models, loggedInUser }) {
   const { User } = models;
   const { userId } = args;
   const currentUser = await loggedInUser();
@@ -8,10 +8,10 @@ export async function unFollowTag (parent, args, { models, loggedInUser }) {
   if (!currentUser) {
     throw new AuthenticationError("You must be logged in to unfollow an author");
   }
-  if(!currentUser.authors.includes(userId)) {
+  if (!currentUser.authors.includes(userId)) {
     throw new Error("You are not following this user!");
   }
-  if(userId === currentUser._id) {
+  if (userId === currentUser._id) {
     throw new Error("You cannot unfollow yourself!");
   }
   const user = await User.findOne({ _id: userId });
@@ -25,7 +25,7 @@ export async function unFollowTag (parent, args, { models, loggedInUser }) {
       _id: currentUser._id
     },
     {
-      $pull: { authors: tagId }
+      $pull: { authors: userId }
     },
     { new: true }
   );

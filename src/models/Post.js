@@ -14,10 +14,10 @@ const PostSchema = new Schema({
   }],
   title: { type: String, index: true },
   body: { type: String, index: true },
-  createdAt: { type: Date },
+  createdAt: { type: Date, default: Date.now() },
   type: {
     type: String,
-    enum : ['user','guestUserA', 'guestUserB'],
+    enum: ['user', 'guestUserA', 'guestUserB'],
     required: 'Post type is required',
   }
 });

@@ -1,18 +1,18 @@
 import { AuthenticationError } from "apollo-server-core";
 
-export async function followTag (parent, args, { models, loggedInUser }) {
+export async function followAuthor(parent, args, { models, loggedInUser }) {
   const { User } = models;
   const { userId } = args;
   const currentUser = await loggedInUser();
 
   if (!currentUser) {
-    throw new AuthenticationError("You must be logged in to follow a tag");
+    throw new AuthenticationError("You must be logged in to follow an author");
   }
-  if(userId === currentUser._id) {
+  if (currentUser.authors.includes(userId)) {
+    throw new Error("You already follow this user!");
+  }
+  if (userId === currentUser._id) {
     throw new Error("You cannot follow yourself!");
-  }
-  if(currentUser.tags.includes(tagId)) {
-    throw new Error("You already follow this author!");
   }
   const user = await User.findOne({ _id: userId });
 
@@ -25,7 +25,7 @@ export async function followTag (parent, args, { models, loggedInUser }) {
       _id: currentUser._id
     },
     {
-      $addToSet: { authors: tagId }
+      $addToSet: { authors: userId }
     },
     { new: true }
   );

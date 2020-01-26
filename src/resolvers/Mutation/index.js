@@ -7,6 +7,9 @@ import { followTag } from "./tags/followTag";
 import { unFollowTag } from "./tags/unFollowTag";
 import { login } from "./users/login";
 import { signup } from "./users/signup";
+import { followAuthor } from "./users/followAuthor";
+import { unFollowAuthor } from "./users/unFollowAuthor";
+
 
 export default {
   login,
@@ -17,5 +20,7 @@ export default {
   createTag,
   deleteTag,
   followTag,
-  unFollowTag
+  unFollowTag,
+  followAuthor,
+  unFollowAuthor
 };
