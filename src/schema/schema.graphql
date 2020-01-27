@@ -1,9 +1,9 @@
 type Query {
   "fetch list of all users"
-  users(cursor: Cursor): [User!]!
+  users: [User!]!
 
   "fetch list of all posts"
-  posts(cursor: Cursor): [Post!]!
+  posts(cursor: CursorInput): PostsPayload!
 
   "fetch current user"
   tags: [Tag!]!
@@ -14,10 +14,10 @@ type Query {
 
 type Mutation {
   "Register new user using `username` and `password`"
-  signup(username: String!, password: String!): UserAuth!
+  signup(username: String!, password: String!): Auth!
 
   "Authenticate user to generate login token"
-  login(username: String!, password: String!): UserAuth!
+  login(username: String!, password: String!): Auth!
 
   "creates new post using `CreatePostInput`"
   createPost(data: CreatePostInput!): Post!
@@ -47,9 +47,10 @@ type Mutation {
   unFollowAuthor(userId: ID!): User
 }
 
-input Cursor {
-  limit: String
-  last: ID
+input CursorInput {
+  limit: Int
+  page: Int
+
 }
 
 input CreateTagInput {
@@ -74,6 +75,16 @@ enum PostType {
   user
 }
 
+type PostsPayload {
+  posts: [Post!]
+  cursor: CursorPayload
+}
+
+type CursorPayload {
+  hasNext: Boolean!
+  totalCount: Int!
+}
+
 type Tag {
   _id: ID!
   name: String!
@@ -86,7 +97,7 @@ type User {
   authors: [User]
 }
 
-type UserAuth {
+type Auth {
   _id: ID!
   username: String!
   token: String!

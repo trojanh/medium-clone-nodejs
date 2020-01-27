@@ -9,9 +9,10 @@ export async function login(parent, args, { models }) {
     if (!user.verifyPassword(args.password)) {
       throw new AuthenticationError("Invalid username or password");
     }
-
+    console.log({user})
     return {
-      ...user,
+      _id: user._id,
+      username: user.username,
       token: user.getJWT()
     }
 
