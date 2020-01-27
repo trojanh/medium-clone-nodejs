@@ -59,7 +59,6 @@ input CreateTagInput {
 input CreatePostInput {
   title: String!
   body: String!
-  author: ID
   type: PostType
   tags: [ID!]
 }
