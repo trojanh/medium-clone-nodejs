@@ -6,6 +6,7 @@ Medium like feed with interspersed feed of users and non users using GraphQL, Mo
 
 - Self documented API in the form of mutation and queries are available
 
+![demo](graphql-auth.gif)
 
 ## Steps to start
 
@@ -23,7 +24,7 @@ To use API follow these steps:
 1. Generate Token using `signup` or `login` mutations
 2. Set `Authorization` header with `Basic <your-auth-token>` in the HEADER section as shown below:
 
-![setHeaderForAuth.png]
+![](setHeaderForAuth.png)
 
 
 1. Start using below APIs
