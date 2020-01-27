@@ -8,11 +8,11 @@ export async function unFollowAuthor(parent, args, { models, loggedInUser }) {
   if (!currentUser) {
     throw new AuthenticationError("You must be logged in to unfollow an author");
   }
+  if (currentUser._id.equals(userId)) {
+    throw new Error("You cannot unfollow yourself!");
+  }
   if (!currentUser.authors.includes(userId)) {
     throw new Error("You are not following this user!");
-  }
-  if (userId === currentUser._id) {
-    throw new Error("You cannot unfollow yourself!");
   }
   const user = await User.findOne({ _id: userId });
 

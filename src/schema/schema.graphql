@@ -5,6 +5,9 @@ type Query {
   "fetch list of all posts"
   posts(cursor: CursorInput): PostsPayload!
 
+  "fetch list of all posts author by logged in user"
+  myPosts: [Post!]!
+
   "fetch current user"
   tags: [Tag!]!
 

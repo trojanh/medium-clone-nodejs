@@ -5,7 +5,7 @@ export async function deleteTag(parent, args, { models, loggedInUser }) {
   const currentUser = await loggedInUser();
 
   if (!currentUser) {
-    throw new AuthenticationError("You must be logged in to follow a tag");
+    throw new AuthenticationError("You must be logged in to delete a tag");
   }
 
   const tag = await models.Tag.findOne({ _id: args.id });

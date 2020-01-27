@@ -6,7 +6,7 @@ export async function unFollowTag(parent, args, { models, loggedInUser }) {
   const currentUser = await loggedInUser();
 
   if (!currentUser) {
-    throw new AuthenticationError("You must be logged in to follow a tag");
+    throw new AuthenticationError("You must be logged in to un-follow a tag");
   }
   if (!currentUser.tags.includes(tagId)) {
     throw new Error("You are not following this tag!");

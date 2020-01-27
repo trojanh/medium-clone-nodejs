@@ -2,18 +2,20 @@ import { AuthenticationError } from "apollo-server-core";
 
 export async function updatePost(parent, args, { models, loggedInUser }) {
   const { id, data } = args;
-  let postInput = { ...data };
   const currentUser = await loggedInUser();
 
   if (!currentUser) {
-    throw new AuthenticationError("You must be logged in to follow a tag");
+    throw new AuthenticationError("You must be update the post");
   }
+
   const post = await models.Post.findOne({ _id: args.id });
-  if (data.tags) {
-    delete postInput.tags;
-    postInput.$addToSet = { tags: "accessories" };
+  if (!post) {
+    throw new Error("Post not found");
   }
-  const resp = await models.Post.updateOne({ _id: id }, data);
-  console.log(resp);
-  return post;
+
+  if(!currentUser._id.equals(post.author)) {
+    throw new Error("You should be author of post");
+  }
+
+  return models.Post.findOneAndUpdate({ _id: id }, data,  { new: true });
 }

@@ -5,7 +5,7 @@ export async function posts(parent, args, { models, loggedInUser }) {
   const { cursor } = args;
 
   if (!currentUser) {
-    throw new AuthenticationError("You must be logged in to follow a tag");
+    throw new AuthenticationError("You must be logged in to view posts");
   }
   const followingAuthors = currentUser.authors;
   const followingTags = currentUser.tags;

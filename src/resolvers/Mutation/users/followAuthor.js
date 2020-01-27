@@ -8,11 +8,11 @@ export async function followAuthor(parent, args, { models, loggedInUser }) {
   if (!currentUser) {
     throw new AuthenticationError("You must be logged in to follow an author");
   }
+  if (currentUser._id.equals(userId)) {
+    throw new Error("You cannot follow yourself!");
+  }
   if (currentUser.authors.includes(userId)) {
     throw new Error("You already follow this user!");
-  }
-  if (userId === currentUser._id) {
-    throw new Error("You cannot follow yourself!");
   }
   const user = await User.findOne({ _id: userId });
 
