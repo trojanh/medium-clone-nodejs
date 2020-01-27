@@ -2,13 +2,14 @@ import { AuthenticationError } from "apollo-server-core";
 
 export async function posts(parent, args, { models, loggedInUser }) {
   const currentUser = await loggedInUser();
-  console.log("==>", currentUser)
+  const { cursor } = args;
+
   if (!currentUser) {
     throw new AuthenticationError("You must be logged in to follow a tag");
   }
   const followingAuthors = currentUser.authors;
   const followingTags = currentUser.tags;
-  console.log({followingTags})
+
   const userPosts = await models.Post.find({
     type: "user",
     $or: [
@@ -58,7 +59,22 @@ export async function posts(parent, args, { models, loggedInUser }) {
     acc.push(value)
     return acc;
   }, []);
-console.log({posts, userPosts, nonUserPosts})
-  // console.log({respo})
-  return posts;
+
+  if(cursor){
+    cursor.page = cursor.page ? cursor.page : 1;
+    const startIndex = (cursor.limit * cursor.page) - cursor.limit;
+    if(startIndex < 0 || startIndex >= posts.length){
+      throw new Error("Invalid cursor");
+    }
+    const endIndex = (cursor.limit * cursor.page);
+    return {
+      posts: posts.slice(startIndex, endIndex),
+      cursor: {
+        totalCount: posts.length,
+        hasNext: posts.length > endIndex
+      }
+    }
+  }
+
+  return { posts};
 }
