@@ -1,5 +1,6 @@
 import { GraphQLServer } from 'graphql-yoga'
 import mongoose from 'mongoose';
+import dotenv from "dotenv";
 import Query from './resolvers/Query';
 import Mutation from './resolvers/Mutation';
 import Post from './resolvers/Post';
@@ -8,6 +9,7 @@ import { MONGODB_URI, PORT } from './config';
 import authenticate from './lib/authenticate';
 import models from "./models";
 
+dotenv.config();
 const server = new GraphQLServer({
   typeDefs: './src/schema/schema.graphql',
   resolvers: {
