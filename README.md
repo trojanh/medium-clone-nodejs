@@ -36,6 +36,9 @@ To use API follow these steps:
   "fetch list of all users"
   users: [User!]!
 
+  "fetch list of all posts author by logged in user"
+  myPosts: [Post!]!
+
   "fetch list of all posts"
   posts(cursor: CursorInput): PostsPayload!
 
