@@ -87,38 +87,22 @@ To use API follow these steps:
 ```
 
 
+Features
 
-## Problem
+1. Authenticated users can post content [User Post].
 
-Create a feed of posts for users of your Medium.com-like website.
+2. There are also special posts by Medium.com’s community managers [non-User Post]. Let’s say there are 2 types of non-User Posts – Type A and B.
 
-### Given
+3. Each post can have 0 or more tags.
 
-[x] 1. Authenticated users can post content [User Post].
+4. While publishing a Post, the user can choose from a global pool of tags or add new ones.
 
-[x] 2. There are also special posts by Medium.com’s community managers [non-User Post]. Let’s say there are 2 types of non-User Posts – Type A and B.
+5. A User can “follow” other users, as well tags.
 
-[x] 3. Each post can have 0 or more tags.
+6. My feed should show posts by users I follow, and also posts associated with tags I follow.
 
-[x] 4. While publishing a Post, the user can choose from a global pool of tags or add new ones.
+7. The feed should be interspersed with non-User Posts. The sequence of posts should satisfy the following rules:
 
-[x] 5. A User can “follow” other users, as well tags.
+8. Posts should be sorted by recency, and displayed in batches of 10 (via pagination or infinite scrolling)
 
-### Requirement
 
-Specification
-
-[x] 1. My feed should show posts by users I follow, and also posts associated with tags I follow.
-
-[x] 2. The feed should be interspersed with non-User Posts. The sequence of posts should satisfy the following rules:
-
-[x] - Posts should be sorted by recency, and displayed in batches of 10 (via pagination or infinite scrolling)
-
-1. Out of scope:
-
-[x] - Editing and Deletion of posts
-
-[x] - “Unfollowing” users and tags
-
-[ ] - UI is not
-  mandatory. But if you can build something very basic for demonstration, that would be great.
